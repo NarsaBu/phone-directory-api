@@ -2,6 +2,7 @@ package com.example.phonedirectory.controller;
 
 import com.example.phonedirectory.dto.PhoneDtoCreate;
 import com.example.phonedirectory.service.PhoneService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,12 @@ public class PhoneController {
         this.phoneService = phoneService;
     }
 
-    @PostMapping
+    @PostMapping(produces= MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createPhone(@RequestBody PhoneDtoCreate phoneDtoCreate) {
         return phoneService.createPhone(phoneDtoCreate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces= MediaType.APPLICATION_XML_VALUE)
     public void deletePhoneById(@PathVariable(name = "id") UUID id) {
         phoneService.deletePhoneById(id);
     }

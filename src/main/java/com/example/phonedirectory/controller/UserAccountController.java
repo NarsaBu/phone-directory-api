@@ -3,6 +3,7 @@ package com.example.phonedirectory.controller;
 import com.example.phonedirectory.dto.UserAccountDtoCreate;
 import com.example.phonedirectory.dto.UserAccountDtoRead;
 import com.example.phonedirectory.service.UserAccountService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +26,17 @@ public class UserAccountController {
         this.userAccountService = userAccountService;
     }
 
-    @GetMapping
+    @GetMapping(produces=MediaType.APPLICATION_XML_VALUE)
     public List<UserAccountDtoRead> getUserAccountList() {
         return userAccountService.getUserAccountList();
     }
 
-    @PostMapping
+    @PostMapping(produces=MediaType.APPLICATION_XML_VALUE)
     public ResponseEntity<?> createUserAccount(@RequestBody UserAccountDtoCreate userAccountDtoCreate) {
         return userAccountService.createUserAccount(userAccountDtoCreate);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces= MediaType.APPLICATION_XML_VALUE)
     public void deleteUserAccountById(@PathVariable(name = "id") UUID id) {
         userAccountService.deleteUserAccountById(id);
     }
